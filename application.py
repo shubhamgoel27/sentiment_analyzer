@@ -12,16 +12,6 @@ amazon.filter_bad_reviews()
 
 auth = HTTPBasicAuth()
 
-def application(environ, start_response):
-    status = '200 OK'
-    output = 'Hello World!'
-
-    response_headers = [('Content-type', 'text/plain'),
-                        ('Content-Length', str(len(output)))]
-    start_response(status, response_headers)
-
-    return [output]
-
 @auth.get_password
 def get_password(username):
     if username == 'shubham':
@@ -36,7 +26,7 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def index():
+def application():
 	return render_template('index.html')
 
 @app.route('/todo/api/v1.0/review/<int:phone_id>/<int:rev_id>', methods=['GET'])
