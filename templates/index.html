@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/stylesheet.css')}}"> 
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+  
+    <div class="light">
+        <form>
+            <span>
+                <input id='text_bar' type="text" class="search rounded" placeholder="Search...">
+                
+                <input class = 'btn' type="button" value="Distribution" onclick="api_call()">
+                <input class = 'btn' type="button" value="Sentiment" onclick="api_call2()">
+                <input class = 'btn' type="button" value="Overall" onclick="api_call3()">
+                
+            </span>
+        </form>
+    </div>
+    <div id="chart_div"></div>
+    <div id='another_pie'></div>
+    <div id='bottom_left'></div>
+    <div id='bottom_right'></div>
+
+  </body>
+</html>
