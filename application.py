@@ -26,7 +26,7 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def index():
+def application(environ, start_response):
 	return render_template('index.html')
 
 @app.route('/todo/api/v1.0/review/<int:phone_id>/<int:rev_id>', methods=['GET'])
