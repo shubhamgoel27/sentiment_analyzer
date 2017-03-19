@@ -13,7 +13,7 @@ import string
 import os.path
 
 import nltk
-nltk.download('stopwords')
+nltk.data.path.append('nltk')
 from nltk import word_tokenize
 from nltk.stem import SnowballStemmer
 from nltk.corpus import stopwords
