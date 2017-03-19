@@ -12,7 +12,8 @@ import json
 import string
 import os.path
 
-#import nltk
+import nltk
+nltk.download('stopwords')
 from nltk import word_tokenize
 from nltk.stem import SnowballStemmer
 from nltk.corpus import stopwords
