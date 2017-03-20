@@ -22,15 +22,15 @@ def get_password(username):
 def unauthorized():
     return make_response(jsonify({'error': 'Unauthorized access'}), 403)
 
-application = Flask(__name__)
-application.debug=True
+app = Flask(__name__)
+app.debug=True
 
 
-@application.route('/')
+@app.route('/')
 def application(environ, start_response):
 	return render_template('index.html')
 
-@application.route('/todo/api/v1.0/review/<int:phone_id>/<int:rev_id>', methods=['GET'])
+@app.route('/todo/api/v1.0/review/<int:phone_id>/<int:rev_id>', methods=['GET'])
 @auth.login_required
 def get_review_sentiment(phone_id, rev_id):
     if phone_id>len(amazon.data):
@@ -45,21 +45,21 @@ def get_review_sentiment(phone_id, rev_id):
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
-@application.route('/todo/api/v1.0/closest_phone/<string:phone_name>', methods=['GET'])
+@app.route('/todo/api/v1.0/closest_phone/<string:phone_name>', methods=['GET'])
 def get_phone_name(phone_name):
     closest_phone = amazon.get_phone_name(phone_name)
     resp = flask.Response(json.dumps({'closest_phone':closest_phone[0], 'similarity': closest_phone[1]}))
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
-@application.route('/todo/api/v1.0/search_by_phone/<string:phone_name>', methods=['GET'])
+@app.route('/todo/api/v1.0/search_by_phone/<string:phone_name>', methods=['GET'])
 def phone_name_aggregate(phone_name):
     summary = amazon.phone_name_aggregate(phone_name)
     resp = flask.Response(json.dumps(summary))
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
-@application.route('/todo/api/v1.0/summary/<int:index>', methods=['GET'])
+@app.route('/todo/api/v1.0/summary/<int:index>', methods=['GET'])
 def get_summary(index):
     summary = amazon.aggregate_review(index)
 
@@ -67,7 +67,7 @@ def get_summary(index):
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
-@application.route('/todo/api/v1.0/sentiment/<string:phone_name>', methods=['GET'])
+@app.route('/todo/api/v1.0/sentiment/<string:phone_name>', methods=['GET'])
 def get_sentiment(phone_name):
     summary = amazon.phone_name_sentiment(phone_name)
 
@@ -75,7 +75,7 @@ def get_sentiment(phone_name):
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
-@application.route('/todo/api/v1.0/overall', methods=['GET'])
+@app.route('/todo/api/v1.0/overall', methods=['GET'])
 def overall():
     summary = amazon.overall_dict
 
@@ -83,7 +83,7 @@ def overall():
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
-@application.errorhandler(404)
+@app.errorhandler(404)
 def not_found(error):
     resp = flask.Response()
     resp.headers['Access-Control-Allow-Origin'] = '*'
@@ -129,4 +129,5 @@ def not_found(error):
 #     return jsonify({'result': True})
 
 if __name__ == '__main__':
-    application.run()
+    #app.run()
+    print 5
